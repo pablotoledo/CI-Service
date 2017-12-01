@@ -73,6 +73,7 @@ Vagrant.configure(2) do |config|
 
         # Running Portainer to manage Docker Containers
         docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
+        docker start portainer
      SHELL
     end
 
