@@ -35,7 +35,7 @@ Vagrant.configure(2) do |config|
       
       # Installing Docker CE
       ci_service.vm.provision "shell", inline: <<-SHELL
-                sudo yum -y remove docker
+        sudo yum -y remove docker
         sudo yum -y remove docker-selinux
         sudo yum install -y yum-utils device-mapper-persistent-data lvm2
         sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -64,13 +64,16 @@ Vagrant.configure(2) do |config|
           sudo cat /etc/systemd/system/docker.service.d/https-proxy.conf
           sudo systemctl daemon-reload
           sudo systemctl restart docker
-      fi
+        fi
 
         # Installing Docker Compose
         sudo yum --enablerepo=extras install -y epel-release
         sudo yum -y install python-pip
         sudo pip install docker-compose
+     SHELL
 
+     # Running containers...
+     ci_service.vm.provision "shell", inline: <<-SHELL
         # Running Portainer to manage Docker Containers
         docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
         docker start portainer
