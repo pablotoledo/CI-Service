@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins2-master
+    ports:
+     - 8080:8080
+     - 50000:50000
+
+  sonarqube:
+    image: sonarqube
+    container_name: jenkins2-sonar
+    ports:
+      - "6001:9000"
+      - "6092:9092"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+    
+  db:
+    image: postgres
+    container_name: jenkins2-db-sonar
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+  
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: jenkins2-gitlab
+
+  nexus:
+    image: sonatype/nexus
+    container_name: jenkins2-nexus
+    ports:
+      - "6081:8081"
+
