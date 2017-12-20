@@ -6,14 +6,14 @@ services:
     container_name: jenkins2-master
     ports:
      - 8080:8080
-     - 50000:50000
+     - 8085:50000
 
   sonarqube:
     image: sonarqube
     container_name: jenkins2-sonar
     ports:
-      - "6001:9000"
-      - "6092:9092"
+      - "8020:9000"
+      - "8021:9092"
     environment:
       - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
     
@@ -32,5 +32,9 @@ services:
     image: sonatype/nexus
     container_name: jenkins2-nexus
     ports:
-      - "6081:8081"
+      - "8081:8081"
+
+  slave:
+    image: centos7
+    container_name: jenkins2_slave
 

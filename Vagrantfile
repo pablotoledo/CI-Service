@@ -75,7 +75,7 @@ Vagrant.configure(2) do |config|
      # Running containers...
      ci_service.vm.provision "shell", inline: <<-SHELL
         # Running Portainer to manage Docker Containers
-        docker run -d -p 9090:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
+        docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
         docker start portainer
         bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins sonarqube nexus gitlab"
      SHELL
