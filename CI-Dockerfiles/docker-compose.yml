@@ -3,14 +3,14 @@ version: "2"
 services:
   jenkins:
     image: jenkins/jenkins
-    container_name: jenkins2-master
+    container_name: ciservice-master
     ports:
      - 8080:8080
      - 8085:50000
 
   sonarqube:
     image: sonarqube
-    container_name: jenkins2-sonar
+    container_name: ciservice-sonar
     ports:
       - "8020:9000"
       - "8021:9092"
@@ -19,22 +19,29 @@ services:
     
   db:
     image: postgres
-    container_name: jenkins2-db-sonar
+    container_name: ciservice-db-sonar
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=sonar
   
   gitlab:
-    image: gitlab/gitlab-ce
-    container_name: jenkins2-gitlab
+    image: gitlab/gitlab-ce:latest
+    container_name: ciservice-gitlab
+    command: "gitlab-ctl start"
+    hostname: 192.168.50.10
+    ports:
+      - "8030:80"
+      - "8031:443"
+      - "8032:22"
 
   nexus:
     image: sonatype/nexus
-    container_name: jenkins2-nexus
+    container_name: ciservice-nexus
     ports:
       - "8081:8081"
 
   slave:
     image: centos7
-    container_name: jenkins2_slave
-
+    container_name: ciservice-slave
+    ports:
+      - "8040:22"
