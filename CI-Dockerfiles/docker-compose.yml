@@ -25,14 +25,17 @@ services:
       - POSTGRES_PASSWORD=sonar
   
   gitlab:
-    image: gitlab/gitlab-ce:latest
+    image: jtoledog/ciservice:gitlab
     container_name: ciservice-gitlab
-    command: "gitlab-ctl start"
     hostname: 192.168.50.10
     ports:
       - "8030:80"
       - "8031:443"
       - "8032:22"
+    volumes:
+      - gitlab_conf:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
 
   nexus:
     image: sonatype/nexus
@@ -45,3 +48,20 @@ services:
     container_name: ciservice-slave
     ports:
       - "8040:22"
+
+volumes:
+  gitlab_conf:
+    driver_opts:
+      type: none
+      device: /vagrant/gitlab/config
+      o: bind
+  gitlab_logs:
+    driver_opts:
+      type: none
+      device: /vagrant/gitlab/logs
+      o: bind
+  gitlab_data:
+    driver_opts:
+      type: none
+      device: /vagrant/gitlab/data
+      o: bind

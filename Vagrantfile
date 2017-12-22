@@ -77,6 +77,7 @@ Vagrant.configure(2) do |config|
         # Running Portainer to manage Docker Containers
         docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
         docker start portainer
+        bash -c "mv /vagrant/CI-Dockerfiles/gitlab-ce/gitlab.tar.gz /vagrant/gitlab.tar.gz; cd /vagrant/; tar xvf gitlab.tar.gz"
         bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins sonarqube nexus gitlab"
      SHELL
     end
