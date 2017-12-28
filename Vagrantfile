@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
       config.vm.network "private_network", ip: "192.168.50.10"
       ci_service.vm.hostname = "ci-service"
       config.vm.provider :virtualbox do |vb|
-         vb.customize ["modifyvm", :id, "--memory", "3072"]
+         vb.customize ["modifyvm", :id, "--memory", "4096"]
          vb.customize ["modifyvm", :id, "--cpus", "2"]
          vb.name = "ci-service"
       end
