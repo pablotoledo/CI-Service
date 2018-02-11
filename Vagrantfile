@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
       config.vm.network "private_network", ip: "192.168.50.10"
       ci_service.vm.hostname = "ci-service"
       config.vm.provider :virtualbox do |vb|
-         vb.customize ["modifyvm", :id, "--memory", "4096"]
+         vb.customize ["modifyvm", :id, "--memory", "12000"]
          vb.customize ["modifyvm", :id, "--cpus", "2"]
          vb.name = "ci-service"
       end
@@ -89,7 +89,7 @@ Vagrant.configure(2) do |config|
 
         # Inflating Volumes from ZIPS
         bash -c "mv /vagrant/CI-Dockerfiles/gitlab-ce/gitlab.tar.gz /vagrant/volumes/gitlab.tar.gz; cd /vagrant/volumes/; tar xvf gitlab.tar.gz"
-        bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins sonarqube nexus gitlab"
+        bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins slave gitlab nexus sonarqube  "
      SHELL
     end
 

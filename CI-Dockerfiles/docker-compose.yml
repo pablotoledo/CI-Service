@@ -34,7 +34,7 @@ services:
   gitlab:
     image: jtoledog/ciservice:gitlab
     container_name: ciservice-gitlab
-    hostname: 192.168.50.10
+    hostname: gitlab
     ports:
       - "8030:80"
       - "8031:443"
@@ -51,7 +51,7 @@ services:
       - "8081:8081"
 
   slave:
-    image: centos7
+    build: ./jenkins-slave
     container_name: ciservice-slave
     ports:
       - "8040:22"
