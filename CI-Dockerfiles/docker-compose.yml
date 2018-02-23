@@ -2,11 +2,13 @@ version: "2"
 
 services:
   jenkins:
-    image: jenkins/jenkins
+    build: ./jenkins-master
     container_name: ciservice-master
     ports:
      - 8080:8080
      - 8085:50000
+    volumes:
+     - jenkinsmasterhome:/var/jenkins_home
 
   sonarqube:
     image: sonarqube
@@ -106,4 +108,11 @@ volumes:
     driver_opts:
       type: none
       device: /vagrant/volumes/sonarqube/plugins
+      o: bind
+
+  #Jenkins master volume
+  jenkinsmasterhome:
+    driver_opts:
+      type: none
+      device: /vagrant/volumes/master/jenkinshome/
       o: bind

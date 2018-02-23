@@ -86,10 +86,17 @@ Vagrant.configure(2) do |config|
         mkdir -p /vagrant/volumes/sonarqube/plugins/
         mkdir -p /vagrant/volumes/postgresql/config/
         mkdir -p /vagrant/volumes/postgresql/data/
+        mkdir -p /vagrant/volumes/master/jenkinshome/
 
         # Inflating Volumes from ZIPS
         bash -c "mv /vagrant/CI-Dockerfiles/gitlab-ce/gitlab.tar.gz /vagrant/volumes/gitlab.tar.gz; cd /vagrant/volumes/; tar xvf gitlab.tar.gz"
+        #bash -c "mv /vagrant/CI-Dockerfiles/jenkins-master/jenkins_initial_home.tar.gz /vagrant/volumes/master/jenkinshome/jenkins_initial_home.tar.gz; cd /vagrant/CI-Dockerfiles/jenkins-master/; tar xvf jenkins_initial_home.tar.gz"
+
+
+        #UP COMPOSE
         bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins slave gitlab nexus sonarqube  "
+
+
      SHELL
     end
 
