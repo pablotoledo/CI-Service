@@ -13,11 +13,11 @@ EXPOSE 22
 RUN ./start.sh
 
 # Maven Install
-RUN yum install -y maven
+RUN yum install -y maven git
 ADD settings.xml /usr/share/maven/conf/
 
 # Java Install
 RUN yum install -y java-1.8.0-openjdk-devel
-RUN echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" | sudo tee -a /etc/profile
+#RUN echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" | sudo tee -a /etc/profile
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]

@@ -121,13 +121,13 @@ under the License.
 <server>
       <id>snapshots</id>
       <username>admin</username>
-      <password>admin123</password>
+      <password>ciservice</password>
     </server>
 
     <server>
       <id>releases</id>
       <username>admin</username>
-      <password>admin123</password>
+      <password>ciservice</password>
     </server>
 
     
@@ -284,7 +284,7 @@ under the License.
                 <sonar.host.url>
                   http://sonarqube:9000
                 </sonar.host.url>
-		<sonar.login>1609f7f231bffca688ce93081e7f7d2511a6aa55</sonar.login>
+		<sonar.login>5f94f7762e88a8559fbc618abc02d4685dabc4b9</sonar.login>
             </properties>
         </profile>
   </profiles>

@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
       config.vm.network "private_network", ip: "192.168.50.10"
       ci_service.vm.hostname = "ci-service"
       config.vm.provider :virtualbox do |vb|
-         vb.customize ["modifyvm", :id, "--memory", "12000"]
+         vb.customize ["modifyvm", :id, "--memory", "5120"]
          vb.customize ["modifyvm", :id, "--cpus", "2"]
          vb.name = "ci-service"
       end
@@ -75,7 +75,7 @@ Vagrant.configure(2) do |config|
      # Running containers...
      ci_service.vm.provision "shell", inline: <<-SHELL
         # Running Portainer to manage Docker Containers
-        docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth
+        docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer --no-auth -H unix:///var/run/docker.sock
         docker start portainer
         
         # Creating folders for Volumes
