@@ -11,7 +11,7 @@ services:
      - jenkinsmasterhome:/var/jenkins_home
 
   sonarqube:
-    image: sonarqube
+    build: ./sonarqube
     container_name: ciservice-sonarqube
     ports:
       - "8020:9000"
@@ -47,10 +47,12 @@ services:
       - gitlab_data:/var/opt/gitlab
 
   nexus:
-    image: sonatype/nexus
+    build: ./nexus
     container_name: ciservice-nexus
     ports:
       - "8081:8081"
+    volumes:
+      - nexus-data:/sonatype-work
 
   slave:
     build: ./jenkins-slave
@@ -108,6 +110,12 @@ volumes:
     driver_opts:
       type: none
       device: /vagrant/volumes/sonarqube/plugins
+      o: bind
+  #Nexus volume
+  nexus-data:
+    driver_opts:
+      type: none
+      device: /vagrant/volumes/nexus/
       o: bind
 
   #Jenkins master volume

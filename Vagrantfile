@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
         docker start portainer
         
         # Creating folders for Volumes
-        mkdir -p /vagrant/volumes/gilab/
+        mkdir -p /vagrant/volumes/gitlab/
         mkdir -p /vagrant/volumes/sonarqube/opts/
         mkdir -p /vagrant/volumes/sonarqube/data/
         mkdir -p /vagrant/volumes/sonarqube/extensions/
@@ -87,11 +87,14 @@ Vagrant.configure(2) do |config|
         mkdir -p /vagrant/volumes/postgresql/config/
         mkdir -p /vagrant/volumes/postgresql/data/
         mkdir -p /vagrant/volumes/master/jenkinshome/
+        mkdir -p /vagrant/volumes/nexus/
 
         # Inflating Volumes from ZIPS
         bash -c "mv /vagrant/CI-Dockerfiles/gitlab-ce/gitlab.tar.gz /vagrant/volumes/gitlab.tar.gz; cd /vagrant/volumes/; tar xvf gitlab.tar.gz"
-        #bash -c "mv /vagrant/CI-Dockerfiles/jenkins-master/jenkins_initial_home.tar.gz /vagrant/volumes/master/jenkinshome/jenkins_initial_home.tar.gz; cd /vagrant/CI-Dockerfiles/jenkins-master/; tar xvf jenkins_initial_home.tar.gz"
-
+        bash -c "cd /vagrant/CI-Dockerfiles/jenkins-master/; cat jenkinshome.tar.gz.* > jenkinshome.tar.gz ; mv /vagrant/CI-Dockerfiles/jenkins-master/jenkinshome.tar.gz /vagrant/volumes/master/jenkinshome.tar.gz; cd /vagrant/volumes/master/; tar xvf jenkinshome.tar.gz"
+        bash -c "mv /vagrant/CI-Dockerfiles/nexus/nexus.tar.gz /vagrant/volumes/nexus.tar.gz; cd /vagrant/volumes/; tar xvf nexus.tar.gz"
+        bash -c "mv /vagrant/CI-Dockerfiles/db/postgresql.tar.gz /vagrant/volumes/postgresql.tar.gz; cd /vagrant/volumes/; tar xvf postgresql.tar.gz"
+        bash -c "cd /vagrant/CI-Dockerfiles/sonarqube/; cat sonarqube.tar.gz.* > sonarqube.tar.gz ; mv /vagrant/CI-Dockerfiles/sonarqube/sonarqube.tar.gz /vagrant/volumes/sonarqube.tar.gz; cd /vagrant/volumes/; tar xvf sonarqube.tar.gz"
 
         #UP COMPOSE
         bash -c "cd /vagrant/CI-Dockerfiles; docker-compose up -d db jenkins slave gitlab nexus sonarqube  "
