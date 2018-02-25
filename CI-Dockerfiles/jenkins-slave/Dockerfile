@@ -17,6 +17,7 @@ RUN yum install -y maven
 ADD settings.xml /usr/share/maven/conf/
 
 # Java Install
-RUN yum install java-1.8.0-openjdk
+RUN yum install -y java-1.8.0-openjdk-devel
+RUN echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" | sudo tee -a /etc/profile
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
