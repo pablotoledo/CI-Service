@@ -72,7 +72,7 @@ En el caso de Sonar el token creado para acceder a este servicio desde otras apl
 ### Requisitos de HW
 
  - CPU compatible con HiperV
- - La máquina virtual en Vagrant ha sido definida con 5 GB de RAM, por lo que un equipo de al menos 8GB es necesario
+ - La máquina virtual en Vagrant ha sido definida con 8 GB de RAM, por lo que un equipo de al menos 8GB es necesario
 
 ### Requisitos de SW
 
