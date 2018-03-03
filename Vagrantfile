@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
       config.vm.network "private_network", ip: "192.168.50.10"
       ci_service.vm.hostname = "ci-service"
       config.vm.provider :virtualbox do |vb|
-         vb.customize ["modifyvm", :id, "--memory", "5120"]
+         vb.customize ["modifyvm", :id, "--memory", "8192"]
          vb.customize ["modifyvm", :id, "--cpus", "2"]
          vb.name = "ci-service"
       end
@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
       ci_service.vm.provision "shell", inline: <<-SHELL
         sudo yum -y remove docker
         sudo yum -y remove docker-selinux
-        sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+        sudo yum install -y yum-utils device-mapper-persistent-data lvm2 htop
         sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
         sudo yum install -y docker-ce
         sudo groupadd docker

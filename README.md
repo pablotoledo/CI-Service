@@ -76,7 +76,8 @@ En el caso de Sonar el token creado para acceder a este servicio desde otras apl
 
 ### Requisitos de SW
 
- - Virtualbox
+ - Virtualbox : Como software de virtualización
+ - Vagrant : De cara a definir la máquina virtual que ejecutará los distintos contenedores
 
 ## Iniciar CI-Service
 
