@@ -39,6 +39,7 @@ services:
   gitlab:
     image: jtoledog/ciservice:gitlab
     container_name: ciservice-gitlab
+    restart: always
     hostname: gitlab
     ports:
       - "8030:80"
